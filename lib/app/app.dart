@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_using_mvvm/presentation/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
   // const MyApp({Key? key}) : super(key: key);
@@ -17,6 +18,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      // home: Container(),
+      theme: getApplicationTheme(),
+    );
   }
 }
