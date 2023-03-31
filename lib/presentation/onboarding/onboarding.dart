@@ -55,6 +55,39 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
 }
 
+class OnBoardingPage extends StatelessWidget {
+  Sliders _sliders;
+
+  OnBoardingPage(this._sliders, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppSize.s40),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p8),
+          child: Text(
+            _sliders.title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p8),
+          child: Text(
+            _sliders.subTitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ),
+        const SizedBox(height: AppSize.s60),
+      ],
+    );
+  }
+}
+
 class Sliders {
   String title, subTitle, image;
   Sliders(this.title, this.subTitle, this.image);
