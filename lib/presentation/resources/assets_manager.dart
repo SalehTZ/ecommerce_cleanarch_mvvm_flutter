@@ -1,6 +1,6 @@
 const String IMAGES_PATH = "assets/images";
 
-class ImageAssets {
+class AppImageAssets {
   static const String splashLogo = "$IMAGES_PATH/splash_logo.png";
   static const String onBoardingLogo1 = "$IMAGES_PATH/onboarding_logo1.svg";
   static const String onBoardingLogo2 = "$IMAGES_PATH/onboarding_logo2.svg";
