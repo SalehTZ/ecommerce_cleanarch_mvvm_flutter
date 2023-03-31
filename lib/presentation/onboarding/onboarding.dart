@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/assets_manager.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/color_manager.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/strings_manager.dart';
@@ -34,6 +35,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
+        backgroundColor: ColorManager.white,
         elevation: AppSize.s1_5,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
@@ -48,17 +50,88 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           setState(() => _currentIndex = newIndex);
         },
         itemBuilder: (context, index) {
-          // return onboardingPage;
+          return OnBoardingPage(_sliderList[index]);
         },
       ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(AppStrings.skip, textAlign: TextAlign.end),
+              ),
+            ),
+            _getBottomSheetWidget(),
+          ],
+        ),
+      ),
     );
+  }
+
+  Widget _getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: const SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: Icon(Icons.chevron_left_rounded),
+            ),
+            onTap: () {
+              // go to previous page
+            },
+          ),
+        ),
+
+        //! circle indicators
+        Row(
+          children: [
+            for (int i = 0; i < _sliderList.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              )
+          ],
+        ),
+
+        //! right arrow
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: const SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: Icon(Icons.chevron_right_rounded),
+            ),
+            onTap: () {
+              // go to next page
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getProperCircle(int index) {
+    if (index == _currentIndex) {
+      return const Icon(Icons.circle_outlined);
+    } else {
+      return const Icon(Icons.circle_rounded);
+    }
   }
 }
 
 class OnBoardingPage extends StatelessWidget {
-  Sliders _sliders;
+  final Sliders _sliders;
 
-  OnBoardingPage(this._sliders, {Key? key}) : super(key: key);
+  const OnBoardingPage(this._sliders, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +156,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSize.s60),
+        SvgPicture.asset(_sliders.image),
       ],
     );
   }

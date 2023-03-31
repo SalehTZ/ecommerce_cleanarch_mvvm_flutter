@@ -1,6 +1,7 @@
 class AppStrings {
   static const String error = 'Error';
   static const String pageNotFound = 'Page not found!';
+  static const String skip = 'Skip';
 
   //! onBoarding screen
   static const String onBoardingTitle1 = 'SEE THE BEST COURSE #1';
