@@ -5,6 +5,9 @@ import 'package:shop_app_using_mvvm/presentation/resources/assets_manager.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/color_manager.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/strings_manager.dart';
 import 'package:shop_app_using_mvvm/presentation/resources/values_manager.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../resources/routes_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
@@ -36,7 +39,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       backgroundColor: ColorManager.white,
       appBar: AppBar(
         backgroundColor: ColorManager.white,
-        elevation: AppSize.s1_5,
+        elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
           statusBarBrightness: Brightness.dark,
@@ -55,14 +58,21 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       ),
       bottomSheet: Container(
         color: ColorManager.white,
-        height: AppSize.s100,
+        // height: AppSize.s100,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
-                child: const Text(AppStrings.skip, textAlign: TextAlign.end),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                },
+                child: Text(
+                  AppStrings.skip,
+                  textAlign: TextAlign.end,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
             ),
             _getBottomSheetWidget(),
@@ -73,65 +83,84 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   }
 
   Widget _getBottomSheetWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: GestureDetector(
-            child: const SizedBox(
-              height: AppSize.s20,
-              width: AppSize.s20,
-              child: Icon(Icons.chevron_left_rounded),
+    return Container(
+      color: ColorManager.primary,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: Material(
+              color: ColorManager.primary,
+              child: InkWell(
+                child: const SizedBox(
+                  height: AppSize.s20,
+                  width: AppSize.s20,
+                  child: Icon(Icons.chevron_left_rounded),
+                ),
+                onTap: () {
+                  _pageController.previousPage(
+                    duration: const Duration(milliseconds: AppDuration.d300),
+                    curve: Curves.easeInOut,
+                  );
+                },
+              ),
             ),
-            onTap: () {
-              // go to previous page
-              _pageController.previousPage(
-                duration: const Duration(milliseconds: AppDuration.d300),
-                curve: Curves.easeInOut,
-              );
-            },
           ),
-        ),
 
-        //! circle indicators
-        Row(
-          children: [
-            for (int i = 0; i < _sliderList.length; i++)
-              Padding(
-                padding: const EdgeInsets.all(AppPadding.p8),
-                child: _getProperCircle(i),
-              )
-          ],
-        ),
-
-        //! right arrow
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p14),
-          child: GestureDetector(
-            child: const SizedBox(
-              height: AppSize.s20,
-              width: AppSize.s20,
-              child: Icon(Icons.chevron_right_rounded),
+          //! circle indicators
+          // Row(
+          //   children: [
+          //     for (int i = 0; i < _sliderList.length; i++)
+          //       Padding(
+          //         padding: const EdgeInsets.all(AppPadding.p8),
+          //         child: _getProperCircle(i),
+          //       )
+          //   ],
+          // ),
+          SmoothPageIndicator(
+            controller: _pageController,
+            count: 4,
+            effect: SlideEffect(
+              activeDotColor: ColorManager.white,
+              dotColor: ColorManager.lightGrey,
             ),
-            onTap: () {
-              // go to next page
-              _pageController.nextPage(
-                duration: const Duration(milliseconds: AppDuration.d300),
-                curve: Curves.easeInOut,
-              );
-            },
           ),
-        ),
-      ],
+
+          //! right arrow
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p14),
+            child: InkWell(
+              child: const SizedBox(
+                height: AppSize.s20,
+                width: AppSize.s20,
+                child: Icon(Icons.chevron_right_rounded),
+              ),
+              onTap: () {
+                _pageController.nextPage(
+                  duration: const Duration(milliseconds: AppDuration.d300),
+                  curve: Curves.easeInOut,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _getProperCircle(int index) {
     if (index == _currentIndex) {
-      return const Icon(Icons.circle_outlined);
+      return const Icon(
+        Icons.circle_outlined,
+        size: AppSize.s16,
+      );
     } else {
-      return const Icon(Icons.circle_rounded);
+      return Icon(
+        Icons.circle_rounded,
+        color: ColorManager.darkGrey,
+        size: AppSize.s16,
+      );
     }
   }
 }
