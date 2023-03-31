@@ -86,6 +86,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             onTap: () {
               // go to previous page
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: AppDuration.d300),
+                curve: Curves.easeInOut,
+              );
             },
           ),
         ),
@@ -112,6 +116,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             onTap: () {
               // go to next page
+              _pageController.nextPage(
+                duration: const Duration(milliseconds: AppDuration.d300),
+                curve: Curves.easeInOut,
+              );
             },
           ),
         ),
