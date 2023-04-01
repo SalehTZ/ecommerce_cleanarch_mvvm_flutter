@@ -34,5 +34,18 @@ class AppSize {
 }
 
 class AppDuration {
-  static const int d300 = 300;
+  // for miliseconds
+  static const int dms300 = 300;
+  static const int dms500 = 500;
+  static const int dms800 = 800;
+
+  // for seconds
+  static const int ds1 = 1;
+  static const int ds5 = 5;
+  static const int ds8 = 8;
+
+  // for minutes
+  static const int dm1 = 1;
+  static const int dm5 = 5;
+  static const int dm8 = 8;
 }

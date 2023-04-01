@@ -12,6 +12,13 @@ class ColorManager {
   static Color grey2 = HexColor.fromHex('#797979');
   static Color white = HexColor.fromHex('#ffffff');
   static Color error = HexColor.fromHex('#e61f34');
+
+  // colors for page indicator dots
+  static Color pink = HexColor.fromHex('#D864A9');
+  static Color lightBlue = HexColor.fromHex('#576CBC');
+  static Color purple = HexColor.fromHex('#89375F');
+  static Color yellow = HexColor.fromHex('#F7DB6A');
+  static Color darkGreen = HexColor.fromHex('#7AA874');
 }
 
 extension HexColor on Color {

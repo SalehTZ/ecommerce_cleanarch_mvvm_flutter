@@ -100,8 +100,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 ),
                 onTap: () {
                   _pageController.previousPage(
-                    duration: const Duration(milliseconds: AppDuration.d300),
-                    curve: Curves.easeInOut,
+                    duration: const Duration(milliseconds: AppDuration.dms300),
+                    curve: Curves.ease,
                   );
                 },
               ),
@@ -109,21 +109,18 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
 
           //! circle indicators
-          // Row(
-          //   children: [
-          //     for (int i = 0; i < _sliderList.length; i++)
-          //       Padding(
-          //         padding: const EdgeInsets.all(AppPadding.p8),
-          //         child: _getProperCircle(i),
-          //       )
-          //   ],
-          // ),
           SmoothPageIndicator(
             controller: _pageController,
             count: 4,
-            effect: SlideEffect(
-              activeDotColor: ColorManager.white,
-              dotColor: ColorManager.lightGrey,
+            effect: JumpingDotEffect(
+              activeDotColor: _currentIndex == 0
+                  ? ColorManager.pink
+                  : _currentIndex == 1
+                      ? ColorManager.lightBlue
+                      : _currentIndex == 2
+                          ? ColorManager.yellow
+                          : ColorManager.purple,
+              dotColor: ColorManager.grey,
             ),
           ),
 
@@ -138,8 +135,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               ),
               onTap: () {
                 _pageController.nextPage(
-                  duration: const Duration(milliseconds: AppDuration.d300),
-                  curve: Curves.easeInOut,
+                  duration: const Duration(milliseconds: AppDuration.dms300),
+                  curve: Curves.ease,
                 );
               },
             ),
@@ -147,21 +144,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ],
       ),
     );
-  }
-
-  Widget _getProperCircle(int index) {
-    if (index == _currentIndex) {
-      return const Icon(
-        Icons.circle_outlined,
-        size: AppSize.s16,
-      );
-    } else {
-      return Icon(
-        Icons.circle_rounded,
-        color: ColorManager.darkGrey,
-        size: AppSize.s16,
-      );
-    }
   }
 }
 
