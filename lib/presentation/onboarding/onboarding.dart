@@ -91,15 +91,19 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           Padding(
             padding: const EdgeInsets.all(AppPadding.p14),
             child: IconButton(
-              icon: const Icon(Icons.chevron_left_rounded),
+              icon: _currentIndex != 0
+                  ? const Icon(Icons.chevron_left_rounded)
+                  : const Text(''),
               constraints:
                   BoxConstraints.tight(const Size(AppSize.s60, AppSize.s20)),
               padding: const EdgeInsets.all(0),
               onPressed: () {
-                _pageController.previousPage(
-                  duration: const Duration(milliseconds: AppDuration.dms300),
-                  curve: Curves.ease,
-                );
+                if (_currentIndex != 0) {
+                  _pageController.previousPage(
+                    duration: const Duration(milliseconds: AppDuration.dms300),
+                    curve: Curves.ease,
+                  );
+                }
               },
             ),
           ),
@@ -124,15 +128,21 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           Padding(
             padding: const EdgeInsets.all(AppPadding.p14),
             child: IconButton(
-              icon: const Icon(Icons.chevron_right_rounded),
+              icon: _currentIndex != 3
+                  ? const Icon(Icons.chevron_right_rounded)
+                  : const Icon(Icons.done),
               constraints:
                   BoxConstraints.tight(const Size(AppSize.s60, AppSize.s20)),
               padding: const EdgeInsets.all(0),
               onPressed: () {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: AppDuration.dms300),
-                  curve: Curves.ease,
-                );
+                if (_currentIndex != 3) {
+                  _pageController.nextPage(
+                    duration: const Duration(milliseconds: AppDuration.dms300),
+                    curve: Curves.ease,
+                  );
+                } else {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                }
               },
             ),
           ),
