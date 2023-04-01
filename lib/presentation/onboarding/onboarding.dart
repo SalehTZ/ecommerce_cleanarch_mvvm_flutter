@@ -90,21 +90,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         children: [
           Padding(
             padding: const EdgeInsets.all(AppPadding.p14),
-            child: Material(
-              color: ColorManager.primary,
-              child: InkWell(
-                child: const SizedBox(
-                  height: AppSize.s20,
-                  width: AppSize.s20,
-                  child: Icon(Icons.chevron_left_rounded),
-                ),
-                onTap: () {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: AppDuration.dms300),
-                    curve: Curves.ease,
-                  );
-                },
-              ),
+            child: IconButton(
+              icon: const Icon(Icons.chevron_left_rounded),
+              constraints:
+                  BoxConstraints.tight(const Size(AppSize.s60, AppSize.s20)),
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                _pageController.previousPage(
+                  duration: const Duration(milliseconds: AppDuration.dms300),
+                  curve: Curves.ease,
+                );
+              },
             ),
           ),
 
@@ -127,13 +123,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           //! right arrow
           Padding(
             padding: const EdgeInsets.all(AppPadding.p14),
-            child: InkWell(
-              child: const SizedBox(
-                height: AppSize.s20,
-                width: AppSize.s20,
-                child: Icon(Icons.chevron_right_rounded),
-              ),
-              onTap: () {
+            child: IconButton(
+              icon: const Icon(Icons.chevron_right_rounded),
+              constraints:
+                  BoxConstraints.tight(const Size(AppSize.s60, AppSize.s20)),
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
                 _pageController.nextPage(
                   duration: const Duration(milliseconds: AppDuration.dms300),
                   curve: Curves.ease,
