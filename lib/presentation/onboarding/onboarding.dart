@@ -7,6 +7,7 @@ import 'package:shop_app_using_mvvm/presentation/resources/strings_manager.dart'
 import 'package:shop_app_using_mvvm/presentation/resources/values_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../domain/model.dart';
 import '../resources/routes_manager.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -17,20 +18,20 @@ class OnBoardingView extends StatefulWidget {
 }
 
 class _OnBoardingViewState extends State<OnBoardingView> {
-  late final List<Sliders> _sliderList = _getSliderData();
+  late final List<SlidersModel> _sliderList = _getSliderData();
 
   final PageController _pageController = PageController(initialPage: 0);
   int _currentIndex = 0;
 
-  List<Sliders> _getSliderData() => [
-        Sliders(AppStrings.onBoardingTitle1, AppStrings.onBoardingSubTitle1,
-            AppImageAssets.onBoardingLogo1),
-        Sliders(AppStrings.onBoardingTitle2, AppStrings.onBoardingSubTitle2,
-            AppImageAssets.onBoardingLogo2),
-        Sliders(AppStrings.onBoardingTitle3, AppStrings.onBoardingSubTitle3,
-            AppImageAssets.onBoardingLogo3),
-        Sliders(AppStrings.onBoardingTitle4, AppStrings.onBoardingSubTitle4,
-            AppImageAssets.onBoardingLogo4),
+  List<SlidersModel> _getSliderData() => [
+        SlidersModel(AppStrings.onBoardingTitle1,
+            AppStrings.onBoardingSubTitle1, AppImageAssets.onBoardingLogo1),
+        SlidersModel(AppStrings.onBoardingTitle2,
+            AppStrings.onBoardingSubTitle2, AppImageAssets.onBoardingLogo2),
+        SlidersModel(AppStrings.onBoardingTitle3,
+            AppStrings.onBoardingSubTitle3, AppImageAssets.onBoardingLogo3),
+        SlidersModel(AppStrings.onBoardingTitle4,
+            AppStrings.onBoardingSubTitle4, AppImageAssets.onBoardingLogo4),
       ];
 
   @override
@@ -153,7 +154,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 }
 
 class OnBoardingPage extends StatelessWidget {
-  final Sliders _sliders;
+  final SlidersModel _sliders;
 
   const OnBoardingPage(this._sliders, {Key? key}) : super(key: key);
 
@@ -184,9 +185,4 @@ class OnBoardingPage extends StatelessWidget {
       ],
     );
   }
-}
-
-class Sliders {
-  String title, subTitle, image;
-  Sliders(this.title, this.subTitle, this.image);
 }

@@ -1,8 +1,13 @@
+import 'dart:async';
+
+import 'package:shop_app_using_mvvm/domain/model.dart';
 import 'package:shop_app_using_mvvm/presentation/base/base_view_model.dart';
 
 class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   //todo implement stream controllers
+  final StreamController _streamController =
+      StreamController<SliderViewModel>();
 
   @override
   void start() {
@@ -41,10 +46,20 @@ abstract class OnBoardingViewModelInputs {
 
   /// when the page changes, new index is passed
   void onPageChanged(int index);
+
+  Sink get inputSliderViewModel;
 }
 
 /// outputs mean data or results that
 /// will be received from the view model to the view
 abstract class OnBoardingViewModelOutputs {
-  //todo implement it later
+  Stream<SliderViewModel> get outputSliderViewModel;
+}
+
+class SliderViewModel {
+  SlidersModel sliders;
+  int numOfSlides;
+  int currentIndex;
+
+  SliderViewModel(this.sliders, this.numOfSlides, this.currentIndex);
 }
